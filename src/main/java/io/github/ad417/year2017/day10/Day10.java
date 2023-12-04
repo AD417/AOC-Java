@@ -50,7 +50,8 @@ public class Day10 {
     }
 
     private static int partA(String data) {
-        Integer[] knots = Arrays.stream(data.trim().split(",")).map(Integer::parseInt).toArray(Integer[]::new);
+        Integer[] knots = Arrays.stream(data.trim().split(","))
+                .map(Integer::parseInt).toArray(Integer[]::new);
         int[] array = initialArray();
         pos = 0;
         skipSize = 0;

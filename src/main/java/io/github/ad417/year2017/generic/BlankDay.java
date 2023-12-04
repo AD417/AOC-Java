@@ -12,7 +12,7 @@ public class BlankDay {
     }
 
     public static void main(String[] args) {
-        String data = AocUtils.readPuzzleInput();
+        String data = AocUtils.readPuzzleInput().trim();
         String[] lines = data.lines().toArray(String[]::new);
 
         AocUtils.sendPuzzleAnswer(1, partA(lines));
