@@ -13,6 +13,11 @@ public class Day02 {
         BLUE,
         GREEN
     }
+
+    /**
+     * A color-integer pair showing how many cubes of some color
+     * have been selected.
+     */
     static class Selection {
         private final Color color;
         private final int cubes;

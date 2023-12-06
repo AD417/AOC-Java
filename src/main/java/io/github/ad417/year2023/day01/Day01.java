@@ -2,7 +2,7 @@ package io.github.ad417.year2023.day01;
 
 import tk.vivas.adventofcode.AocUtils;
 
-public class Day1 {
+public class Day01 {
     private static String[] NUMBERS = new String[] {
             "one", "two", "three", "four", "five",
             "six", "seven", "eight", "nine"
