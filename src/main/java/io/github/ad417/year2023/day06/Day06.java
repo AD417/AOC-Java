@@ -80,6 +80,18 @@ public class Day06 {
         }
         return time - mid * 2 - 1;
     }
+    private static long partBTake2(long[] values) {
+        long time = values[0];
+        long distance = values[1];
+
+        long a = distance / 2;
+        long b = 0;
+        while (a != b) {
+            b = a;
+            a = distance / (time - b);
+        }
+        return time - 2 * a - 1;
+    }
 
     public static void main(String[] args) {
         String data = AocUtils.readPuzzleInput().trim();
@@ -88,5 +100,6 @@ public class Day06 {
         AocUtils.sendPuzzleAnswer(1, partA(vals));
         long[] trueVals = parseLegitInput(data);
         AocUtils.sendPuzzleAnswer(2, partB(trueVals));
+        System.out.println(partBTake2(trueVals));
     }
 }
