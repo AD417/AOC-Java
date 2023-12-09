@@ -28,30 +28,65 @@ public class Day09 {
         return map;
     }
 
-    /*private static int findShortestPath(String currentPos, int currentDistance, HashSet<String> visited, HashMap<String, HashMap<String, Integer>> map) {
-        if (visited.size() == map.size() + 1) return currentDistance;
+    private static int findShortestPath(String currentPos, int currentDistance, HashSet<String> visited, HashMap<String, HashMap<String, Integer>> map) {
+        if (visited.size() == map.size()) return currentDistance;
         HashMap<String, Integer> toVisit = map.get(currentPos);
 
         int shortestPath = Integer.MAX_VALUE;
-        for (Map.Entry<String, Integer> placeData : toVisit.entrySet()) {
-            if (visited.contains(placeData.getKey()) continue;
-            int
+        for (String place : toVisit.keySet()) {
+            if (visited.contains(place)) continue;
+            int distance = toVisit.get(place);
+            HashSet<String> nowVisited = new HashSet<>(visited);
+            nowVisited.add(place);
+            int shortestFromPlace = findShortestPath(place, currentDistance + distance, nowVisited, map);
+            if (shortestPath > shortestFromPlace) shortestPath = shortestFromPlace;
         }
-    }*/
-
-    private static int partA(String[] lines) {
-        return 0;
+        return shortestPath;
     }
 
-    private static int partB(String[] lines) {
-        return 0;
+    private static int partA(HashMap<String, HashMap<String, Integer>> map) {
+        return map.keySet().stream()
+                .mapToInt(place -> {
+                    HashSet<String> visited = new HashSet<>();
+                    visited.add(place);
+                    return findShortestPath(place, 0, visited, map);
+                })
+                .min()
+                .orElseThrow();
+    }
+
+    private static int findLongestPath(String currentPos, int currentDistance, HashSet<String> visited, HashMap<String, HashMap<String, Integer>> map) {
+        if (visited.size() == map.size()) return currentDistance;
+        HashMap<String, Integer> toVisit = map.get(currentPos);
+
+        int shortestPath = Integer.MIN_VALUE;
+        for (String place : toVisit.keySet()) {
+            if (visited.contains(place)) continue;
+            int distance = toVisit.get(place);
+            HashSet<String> nowVisited = new HashSet<>(visited);
+            nowVisited.add(place);
+            int shortestFromPlace = findLongestPath(place, currentDistance + distance, nowVisited, map);
+            if (shortestPath < shortestFromPlace) shortestPath = shortestFromPlace;
+        }
+        return shortestPath;
+    }
+
+    private static int partB(HashMap<String, HashMap<String, Integer>> map) {
+        return map.keySet().stream()
+                .mapToInt(place -> {
+                    HashSet<String> visited = new HashSet<>();
+                    visited.add(place);
+                    return findLongestPath(place, 0, visited, map);
+                })
+                .max()
+                .orElseThrow();
     }
 
     public static void main(String[] args) {
         String data = AocUtils.readPuzzleInput().trim();
         HashMap<String, HashMap<String, Integer>> map = getMap(data);
 
-        /*AocUtils.sendPuzzleAnswer(1, partA(lines));
-        AocUtils.sendPuzzleAnswer(2, partB(lines));*/
+        AocUtils.sendPuzzleAnswer(1, partA(map));
+        AocUtils.sendPuzzleAnswer(2, partB(map));
     }
 }

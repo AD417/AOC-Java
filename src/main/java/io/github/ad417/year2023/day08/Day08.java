@@ -141,6 +141,7 @@ public class Day08 {
                     } while (!point.endsWith("Z"));
                     ZtoZ.push(moveCount);
                 });
+        // ZtoZ == AtoZ, somehow.
         long steps = AtoZ.pop();
         /////// aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
         while (!AtoZ.isEmpty()) steps = LCM(steps, AtoZ.pop());
