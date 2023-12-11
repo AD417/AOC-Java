@@ -64,4 +64,18 @@ public record Coordinate(int row, int col) {
     public boolean inBounds(int maxRow, int maxCol) {
         return 0 <= row && row < maxRow && 0 <= col && col < maxCol;
     }
+
+    /**
+     * Determine the Manhatten (taxicab) distance between two points.
+     * @param other another Coordinate to determine the distance to.
+     * @return the sum of the absolute values of the components.
+     */
+    public int distanceTo(Coordinate other) {
+        return Math.abs(this.row - other.row) + Math.abs(this.col - other.col);
+    }
+
+    @Override
+    public String toString() {
+        return "(" +row+", "+col+")";
+    }
 }

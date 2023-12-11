@@ -1,4 +1,4 @@
-package io.github.ad417.year2017.generic;
+package io.github.ad417.util;
 
 import tk.vivas.adventofcode.AocUtils;
 

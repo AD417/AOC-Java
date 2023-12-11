@@ -136,6 +136,7 @@ public class Day19 {
 
         // System.out.println(partB(replacements, medicine));
         AocUtils.sendPuzzleAnswer(1, partA(replacements, medicine));
+        // I give up.
         // AocUtils.sendPuzzleAnswer(2, partB(replacements, medicine));
     }
 }
