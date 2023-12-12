@@ -15,6 +15,8 @@ public class Day19 {
             // Split before capital letters
             List<String> result = Arrays.stream(parts[1].split("(?<=[A-Za-z])(?=[A-Z])")).toList();
 
+            System.out.println(result.size());
+
             List<List<String>> replacementsFromStart;
             if (replacements.containsKey(start)) {
                 replacementsFromStart = replacements.get(start);
@@ -52,6 +54,8 @@ public class Day19 {
         initial.add("e");
         layer.add(initial);
 
+        Set<List<String>> cache = new HashSet<>();
+
         while (!layer.contains(medicine)) {
             iterations++;
             Set<List<String>> nextLayer = new HashSet<>();
@@ -65,7 +69,10 @@ public class Day19 {
                         List<String> futureMolecule = new LinkedList<>(molecule.subList(0, i));
                         futureMolecule.addAll(product);
                         if (i != molecule.size()-1) futureMolecule.addAll(molecule.subList(i+1, molecule.size()));
-                        if (futureMolecule.size() <= maxLen) nextLayer.add(futureMolecule);
+                        if (futureMolecule.size() > maxLen) continue;
+                        if (cache.contains(futureMolecule)) continue;
+                        cache.add(futureMolecule);
+                        nextLayer.add(futureMolecule);
                     }
                 }
             });
@@ -132,9 +139,8 @@ public class Day19 {
         String[] parts = data.split("\n\n");
         HashMap<String, List<List<String>>> replacements = getReplacements(parts[0]);
         List<String> medicine = Arrays.stream(parts[1].split("(?<=[A-Za-z])(?=[A-Z])")).toList();
-        System.out.println(medicine.size());
 
-        // System.out.println(partB(replacements, medicine));
+        // System.out.println(partBButHeapSpace(replacements, medicine));
         AocUtils.sendPuzzleAnswer(1, partA(replacements, medicine));
         // I give up.
         // AocUtils.sendPuzzleAnswer(2, partB(replacements, medicine));
