@@ -118,7 +118,7 @@ public class Day12ButMaybeDP {
                 }
             }
         }
-        System.out.println("Things looked at: " + steps);
+        //System.out.println("Things looked at: " + steps);
         return possibilities;
     }
 
