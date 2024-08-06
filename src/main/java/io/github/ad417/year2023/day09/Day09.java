@@ -16,6 +16,10 @@ public class Day09 {
         return histories;
     }
     private static int partA(List<List<Integer>> histories) {
+        // You know, this is the kind of thing I used to do for fun, without
+        // expecting it to have any meaningful applications.
+        // Just implement the algorithm as given, using lists of lists, and
+        // interpolate the next value.
         int sum = 0;
         for (List<Integer> history : histories) {
             Stack<List<Integer>> layers = new Stack<>();
@@ -45,6 +49,8 @@ public class Day09 {
     }
 
     private static long partB(List<List<Integer>> histories) {
+        // Same as part A, except you shift a new value to the front of
+        // every list.
         int sum = 0;
         for (List<Integer> history : histories) {
             Stack<List<Integer>> layers = new Stack<>();

@@ -63,6 +63,12 @@ public class Day11 {
     }
 
     private static int partA(Set<Coordinate> galaxies) {
+        // The shortest path, as given by the problem, is just the Manhattan
+        // distance between the points.
+
+        // Due to a fencepost error in my expansion math, the expansion factor
+        // is 1 lower than it should be. In part A, a single empty row is
+        // replaced by 2.
         galaxies = getExpansion(galaxies, 1);
         int sum = 0;
         for (Coordinate galaxy1 : galaxies) {
@@ -74,7 +80,11 @@ public class Day11 {
     }
 
     private static long partB(Set<Coordinate> galaxies) {
-        galaxies = getExpansion(galaxies, 1_000_000 - 1); // Not sure where the fencepost comes from...
+        // Same as part 1, but with a larger expansion factor.
+        //
+        // An expansion of a single row to 1,000,000 is equal to
+        // adding 999,999 empty rows.
+        galaxies = getExpansion(galaxies, 1_000_000 - 1);
         long sum = 0;
         for (Coordinate galaxy1 : galaxies) {
             for (Coordinate galaxy2 : galaxies) {

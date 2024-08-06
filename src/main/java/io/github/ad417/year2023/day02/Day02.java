@@ -73,6 +73,9 @@ public class Day02 {
     }
 
     private static int partA(String[] lines) {
+        // Another problem ruined by my lack of understanding of Regex.
+        // I convert the components in each line into groups of colors and
+        // their associated numbers, and then check their validity.
         int sum = 0;
         for (int i = 1; i <= lines.length; i++) {
             String game = lines[i-1];
@@ -86,6 +89,9 @@ public class Day02 {
     }
 
     private static int partB(String[] lines) {
+        // Same problem with Regex.
+        // I basically take the maximum of all red, blue, and green counts, and
+        // establish that as the required minimum cubes required.
         int sum = 0;
         for (String game : lines) {
             List<Selection> cubes = parseGame(game);

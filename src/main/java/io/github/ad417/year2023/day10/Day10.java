@@ -77,19 +77,10 @@ public class Day10 {
         }
         return upscaled;
     }
-
-    private static HashSet<Coordinate> getEmpty(String data) {
-        HashSet<Coordinate> empty = new HashSet<>();
-        String[] lines = data.split("\n");
-        for (int row = 0; row < lines.length; row++) {
-            char[] line = lines[row].toCharArray();
-            for (int col = 0; col < line.length; col++) {
-                if (line[col] == '.') empty.add(new Coordinate(row, col));
-            }
-        }
-        return empty;
-    }
     private static int partA(HashMap<Coordinate, List<Coordinate>> connections) {
+        // Use a one-way BFS to determine all the tiles connected to the start
+        // point. The loop will always be an even number of tiles long, and the
+        // furthest point is always (length / 2) tiles from the start.
         List<Coordinate> seen = new LinkedList<>();
         seen.add(origin);
         Coordinate current = connections.get(origin).get(0);
@@ -105,6 +96,14 @@ public class Day10 {
     }
 
     private static int partB(HashMap<Coordinate, List<Coordinate>> connections) {
+        // There are more elegant solutions with Pick's Theorem, but I used
+        // the Ray Casting algorithm. Start at your point, go in an arbitrary
+        // direction (north), and check how many times you cross the wall. If
+        // odd, then you are within the shape. Else, you are outside.
+        //
+        // Some map expansion has to be done to address the fact that hitting
+        // a wall dead-on doesn't tell you if the beam would cross it. Taking
+        // Each wall tile and expanding it to a 3x3 is enough for this.
         List<Coordinate> inLoop = new LinkedList<>();
         inLoop.add(origin);
         Coordinate current = connections.get(origin).get(0);

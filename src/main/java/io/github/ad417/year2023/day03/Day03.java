@@ -19,6 +19,9 @@ public class Day03 {
     }
 
     private static HashMap<Position, String> createGrid(String data) {
+        // I effectively cheat with the parts map. A number has a position,
+        // but also implicitly has a length. That allows the 8, 10, or 12
+        // positions around the tile to be checked for having parts.
         String[] lines = data.split("\n");
 
         HashMap<Position, String> map = new HashMap<>();
@@ -36,6 +39,8 @@ public class Day03 {
     }
 
     private static int partA(HashMap<Position, String> map) {
+        // For every number, check if it is near a part. If it is,
+        // Then add it to the answer.
         int sum = 0;
         for (Position pos : map.keySet()) {
             String num = map.get(pos);
@@ -56,6 +61,10 @@ public class Day03 {
     }
 
     private static int partB(HashMap<Position, String> map) {
+        // For every number, check if it's near a gear.
+        // If it is, put it in a list. If there is already an entry in the
+        // list, then there are 2 numbers near this gear, and its ratio can be
+        // determined.
         int sum = 0;
         HashMap<Position, Integer> seenGears = new HashMap<>();
         for (Position pos : map.keySet()) {
@@ -70,7 +79,6 @@ public class Day03 {
                     if (!gear.equals("*")) continue;
 
                     if (seenGears.containsKey(adj)) {
-                        assert  seenGears.get(adj) != 0;
                         sum += seenGears.get(adj) * Integer.parseInt(num);
                         seenGears.put(adj, 0);
                     } else {

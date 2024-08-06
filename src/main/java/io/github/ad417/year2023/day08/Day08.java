@@ -20,6 +20,8 @@ public class Day08 {
         return map;
     }
     private static int partA(String moves, HashMap<String, String[]> map) {
+        // Just step through the provided instructions until we reach the
+        // destination. Nothing special here.
         int moveCount = 0;
         String currentPos = "AAA";
         while (!currentPos.equals("ZZZ")) {
@@ -120,6 +122,23 @@ public class Day08 {
     }
 
     private static long partB(String moves, HashMap<String, String[]> map) {
+        // This is the first input-specific problem.
+        // It turns out that the input has 2 properties we can exploit.
+        //
+        // 1.   The distance from any XXA tile to XXZ is always evenly
+        //      divisible by the length of the movement instructions. This
+        //      means the Instructions are irrelevant after you compute them
+        //      the first time.
+        //
+        // 2.   The number of steps required to go from XXA to XXZ is the same
+        //      As going from XXZ to XXZ, because XXZ's "neighbors" are the
+        //      same as XXA's neighbors. This means that there is a cycle of
+        //      A known length for each XXA-XXZ input.
+        //
+        // By leveraging both of these properties, we find that the answer is
+        // going to be whenever all the XXZs arrive at the same time. This
+        // takes too long to do by hand, so we instead take the LCM of all
+        // the cycle lengths.
         Stack<Long> AtoZ = new Stack<>();
         Stack<Long> ZtoZ = new Stack<>();
         map.keySet().stream()

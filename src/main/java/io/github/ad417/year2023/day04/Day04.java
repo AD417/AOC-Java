@@ -6,6 +6,8 @@ import java.util.*;
 
 public class Day04 {
     private static int partA(String[] lines) {
+        // Check how many cards in the winning part appear in the card part.
+        // if matches is nonzero, then add 2 ^ (matches - 1).
         int totalWinnings = 0;
         for (String line : lines) {
             String winningPart = line.split(" \\| ")[0];
@@ -20,6 +22,11 @@ public class Day04 {
     }
 
     private static int partB(String[] lines) {
+        // The first of several Dynamic Programming puzzles.
+        // Since we go in order from 1 to 201, by the time we get to card X, we
+        // can be certain that all the copies of card X have already been won
+        // by prior cards. Therefore, we can determine how many cards to copy
+        // to subsequent cards, and avoid computing each card individually.
         List<Integer> cardCount = new ArrayList<>(Arrays.stream(lines).map(x -> 1).toList());
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i];

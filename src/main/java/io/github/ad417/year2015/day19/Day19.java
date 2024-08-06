@@ -118,19 +118,20 @@ public class Day19 {
         solution.add("e");
 
         // Take the medicine, and work backwards to create the problem!
-        Set<List<String>> precursors = new HashSet<>();
+        int iterations = 0;
+        /*List<>
         precursors.add(medicine);
 
         int iterations = 0;
         while (!precursors.contains(solution)) {
             iterations++;
-            Set<List<String>> previousPrecursors = new HashSet<>();
+            List<List<String>> previousPrecursors = new LinkedList<>();
             precursors.forEach(molecule -> {
                 previousPrecursors.addAll(getPrecursorsTo(molecule, inversions, inversionSizes));
             });
             precursors = previousPrecursors;
-            System.out.println(precursors.size());
-        }
+            precursors = List.of(precursors.get(0));
+        }*/
         return iterations;
     }
 
@@ -143,6 +144,7 @@ public class Day19 {
         // System.out.println(partBButHeapSpace(replacements, medicine));
         AocUtils.sendPuzzleAnswer(1, partA(replacements, medicine));
         // I give up.
+        System.out.println(partBAlsoHasNoHeapSpace(replacements, medicine));
         // AocUtils.sendPuzzleAnswer(2, partB(replacements, medicine));
     }
 }

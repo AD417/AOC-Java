@@ -96,6 +96,9 @@ public class Day07 {
         }
     }
     private static int partA(String data) {
+        // The Hand class handles parsing the data and determining what the
+        // worth of a hand is. Then, we just sort it, do some multiplying of
+        // the bets, and that's the total score.
         List<Hand> handsSorted = data.lines().map(Hand::new).sorted().toList();
         int total = 0;
         for (int i = 0; i < handsSorted.size(); i++) {
@@ -105,6 +108,10 @@ public class Day07 {
     }
 
     private static int partB(String data) {
+        // Same as part A, except the logic is slightly different because of
+        // the new rules.
+
+        // I will say... shouldn't the Jack be the best card?
         List<WildHand> handsSorted = data.lines().map(WildHand::new).sorted().toList();
         int total = 0;
         for (int i = 0; i < handsSorted.size(); i++) {

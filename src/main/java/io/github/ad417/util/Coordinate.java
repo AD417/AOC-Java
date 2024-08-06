@@ -24,6 +24,17 @@ public record Coordinate(int row, int col) {
     }
 
     /**
+     * Multiply / "scale" this Coordinate by a scalar value. Intended to be
+     * applied to a unit Coordinate to get some larger value.
+     * @param scalar the amount to scale the Coordinate by.
+     * @return a Coordinate with its row and column amounts scaled by the
+     * give amount.
+     */
+    public Coordinate mult(int scalar) {
+        return new Coordinate(row*scalar, col*scalar);
+    }
+
+    /**
      * Get the four positions orthogonally adjacent to this current position.
      * That is, the positions directly North, South, East, and West of here.
      * @return a Set of Coordinates that can be iterated over.
@@ -32,7 +43,7 @@ public record Coordinate(int row, int col) {
         Set<Coordinate> orth = new HashSet<>();
         for (int row = this.row-1; row <= this.row+1; row++) {
             for (int col = this.col-1; col <= this.col+1; col++) {
-                if (row != this.row && col != this.col) continue;
+                if ((row != this.row) == (col != this.col)) continue;
                 orth.add(new Coordinate(row, col));
             }
         }
@@ -72,6 +83,14 @@ public record Coordinate(int row, int col) {
      */
     public int distanceTo(Coordinate other) {
         return Math.abs(this.row - other.row) + Math.abs(this.col - other.col);
+    }
+
+    public Coordinate wrap(Coordinate largest) {
+        int row = this.row % largest.row();
+        if (row < 0) row += largest.row();
+        int col = this.col % largest.col();
+        if (col < 0) col += largest.col();
+        return new Coordinate(row, col);
     }
 
     @Override

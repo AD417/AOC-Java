@@ -9,6 +9,8 @@ import java.util.List;
 
 public class Day13 {
     static class Matrix extends ArrayList<List<Character>> {
+        // I really only did this because writing out `List<List<Character>>`
+        // was bound to get annoying.
         public Matrix(int size) {
             super(size);
         }
@@ -16,6 +18,7 @@ public class Day13 {
             super(old);
         }
         public Matrix transpose() {
+            // Swap the X and Y axes. The main reason this structure exists.
             Matrix transposition = new Matrix(get(0).size());
             for (int rowT = 0; rowT < get(0).size(); rowT++) {
                 List<Character> transRow = new ArrayList<>(size());
@@ -27,12 +30,18 @@ public class Day13 {
             return transposition;
         }
         public int findReflection(List<Integer> possiblePoints) {
+            // In retrospect, I should've just copied the function below.
+            // Takes a list, and validates that some reflection point is
+            // actually a reflection point.
             for (int point : possiblePoints) {
                 if (reflectsAt(point)) return point;
             }
             return -1;
         }
         public int findAlmostReflection() {
+            // Should've done this from the start.
+            // For every row, check if it "almost reflects" -- that is, the sum
+            // of the number of flaws in the reflection is exactly 1.
             for (int row = 0; row < size(); row++) {
                 if (almostReflectsAt(row)) return row;
             }
@@ -75,6 +84,13 @@ public class Day13 {
         }
     }
     private static int partA(List<Matrix> grids) {
+        // My most hideous code, in retrospect.
+        // Checks if a pair of rows are identical. If so, then it is a
+        // candidate for being the reflection line. Since one line is not
+        // enough, I then run a more comprehensive test later on.
+        // If there are no rows, then I transpose the matrix and check the
+        // rows again, because it's less typing on paper.
+        // (It was not less typing.)
         int sum = 0;
         for (Matrix grid : grids) {
             int mult = 100;
@@ -121,6 +137,8 @@ public class Day13 {
     }
 
     private static int partB(List<Matrix> grids) {
+        // Same as part A, except less stupid and checking for the singular
+        // blemish on the mirror.
         int sum = 0;
         for (Matrix grid : grids) {
             int row = grid.findAlmostReflection();

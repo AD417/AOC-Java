@@ -76,6 +76,8 @@ public class Day12 {
         }
     }
     static int partA(List<SpringConfig> initialConfigs) {
+        // Brute force searching, using DFS with Backtracking.
+        // Needless to say, it doesn't work for part B.
         List<SpringConfig> configs = initialConfigs;
         int possibilities = 0;
         while (!configs.isEmpty()) {
@@ -99,6 +101,7 @@ public class Day12 {
     }
 
     private static int partB(List<SpringConfig> initialConfigs) {
+        // Very naive implementation of Part B.
         List<SpringConfig> configs = initialConfigs.stream().map(SpringConfig::unfold).toList();
         int possibilities = 0;
         while (!configs.isEmpty()) {

@@ -197,6 +197,9 @@ public class Day05 {
     }
 
     private static long partA(List<List<RangeMap>> almanac, long[] seeds) {
+        // Because of the setup of the input, we can just check if a seed is
+        // in any almanac entry, and then increase or decrease it as necessary
+        // for the next map in the entry.
         for (List<RangeMap> entry : almanac) {
             for (int i = 0; i < seeds.length; i++) {
                 final int index = i;
@@ -213,6 +216,12 @@ public class Day05 {
     }
 
     private static long partB(List<List<RangeMap>> almanac, long[] seeds) {
+        // We treat the almanac as a function over the "Integers"
+        // (all long values), and then just map subsets of the integers through
+        // the function. if we did this with 0...Long.MAX_VALUE, then we would
+        // convert the entire almanac to a function mapping seed type to
+        // location. Instead, we only take the subset defined in the input,
+        // and return the lowest location.
         List<Range> actualSeeds = new LinkedList<>();
         for (int i = 0; i < seeds.length; i+= 2) {
             actualSeeds.add(new Range(seeds[i], seeds[i+1]));

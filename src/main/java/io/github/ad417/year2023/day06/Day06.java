@@ -43,6 +43,12 @@ public class Day06 {
         };
     }
     private static int partA(int[] values) {
+        // The problem degenerates into solving a quadratic equation.
+        // Specifically, d = h(t-h).
+        // d = distance travelled
+        // h = time held
+        // t = total time
+        // The quadratic formula could be applied, but I was too lazy to.
         int product = 1;
         for (int i = 0; i < values.length; i+=2) {
             int time = values[i];
@@ -63,6 +69,8 @@ public class Day06 {
     }
 
     private static long partB(long[] values) {
+        // Same as part A, except a binary search is used to compute the
+        // solution in log(n) time.
         long time = values[0];
         long distance = values[1];
 

@@ -8,6 +8,9 @@ public class Day01 {
             "six", "seven", "eight", "nine"
     };
     private static int partA(String[] lines) {
+        // Simple Part 1, although Regex would have been more efficient.
+        // Find the first and last instance of a number, which is computed
+        // using char shenanigans.
         int result = 0;
         for (String line : lines) {
             int lineNum = 0;
@@ -49,6 +52,8 @@ public class Day01 {
     }
 
     private static int partB(String[] lines) {
+        // Same as Part A, but also considering the written out numbers.
+        // Again, Regex would have been better.
         int result = 0;
         for (String line : lines) {
             int lineNum = 0;
